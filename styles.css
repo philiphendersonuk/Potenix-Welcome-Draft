@@ -1,0 +1,576 @@
+/* ------------------------------------------
+   Root variables
+------------------------------------------ */
+:root {
+  --bg: #050814;
+  --panel-bg: #0c1224;
+  --accent: #38e8a5;
+  --accent-soft: rgba(56, 232, 165, 0.12);
+  --text-main: #f5f7ff;
+  --text-muted: #a5afc7;
+  --border-subtle: #202842;
+  --danger: #ff4b6a;
+
+  --radius-lg: 18px;
+  --radius-md: 12px;
+  --shadow-soft: 0 18px 40px rgba(5, 10, 40, 0.6);
+
+  --font-main: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-heading: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* ------------------------------------------
+   Base page
+------------------------------------------ */
+body {
+  margin: 0;
+  font-family: var(--font-main);
+  background: radial-gradient(circle at top, #151b3b 0, #050814 55%);
+  color: var(--text-main);
+}
+
+.app-shell {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* ------------------------------------------
+   Slides
+------------------------------------------ */
+.slide {
+  display: none;
+  max-width: 920px;
+  background: var(--panel-bg);
+  border-radius: 24px;
+  box-shadow: var(--shadow-soft);
+  padding: 24px 22px 20px;
+  border: 1px solid var(--border-subtle);
+  margin: 0 auto;
+}
+
+.slide.active {
+  display: block;
+  animation: slideFadeIn 0.35s ease;
+}
+
+/* No fade on the fullscreen splash (Slide 1) */
+.splash.active {
+  animation: none;
+}
+
+@keyframes slideFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.slide-header h1 {
+  font-family: var(--font-heading);
+  font-size: 1.7rem;
+  letter-spacing: 0.04em;
+  margin: 0;
+}
+
+.slide-tag {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.slide p,
+.slide li {
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.slide ul {
+  margin: 6px 0 12px 20px;
+  padding: 0;
+  color: var(--text-muted);
+}
+
+.slide-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+/* Image block on slides */
+.slide-image {
+  margin: 12px 0 16px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+}
+
+.slide-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  max-height: 260px;
+}
+
+/* ------------------------------------------
+   FULLSCREEN INTRO SPLASH (Slide 1)
+------------------------------------------ */
+.fullscreen-splash {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000 !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0;
+  box-shadow: none;
+  margin: 0;
+  padding: 0;
+  z-index: 9999;
+}
+
+.fullscreen-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Make the intro video blend into the black background */
+.fullscreen-video {
+  width: 100%;
+  max-height: 80vh;
+  height: auto;
+  object-fit: contain;
+  background: #000;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* Continue button beneath video */
+.fullscreen-button {
+  margin-top: 20px;
+  padding: 12px 26px;
+  font-size: 1.1rem;
+}
+
+/* Once we move to slides 2–8, the fullscreen splash should effectively be gone */
+#slide1:not(.active) {
+  display: none !important;
+}
+
+/* ------------------------------------------
+   Logo
+------------------------------------------ */
+.slide-logo {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+}
+
+.slide-logo img {
+  height: 34px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 6px rgba(0,0,0,0.35));
+  opacity: 0.96;
+}
+
+/* ------------------------------------------
+   Buttons
+------------------------------------------ */
+.btn {
+  border: none;
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #161d39;
+  color: var(--text-main);
+  font-family: var(--font-main);
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent), #6df2c6);
+  color: #020509;
+  box-shadow: 0 6px 14px rgba(56, 232, 165, 0.35);
+}
+
+.btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+
+#intro-continue:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+/* ------------------------------------------
+   Feedback text
+------------------------------------------ */
+.feedback {
+  margin-top: 12px;
+  padding: 10px;
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+}
+
+.feedback.success {
+  background: rgba(56, 232, 165, 0.12);
+  border: 1px solid var(--accent);
+  color: var(--accent);
+}
+
+.feedback.error {
+  background: rgba(255, 75, 106, 0.12);
+  border: 1px solid var(--danger);
+  color: var(--danger);
+}
+
+/* ------------------------------------------
+   QUIZ styling
+------------------------------------------ */
+.quiz-question h2 {
+  margin-top: 18px;
+  margin-bottom: 8px;
+  font-family: var(--font-heading);
+}
+
+.quiz-options {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.quiz-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 8px 0;
+  cursor: pointer;
+}
+
+/* ------------------------------------------
+   FLIP CARDS (Slide 4) — main styles
+------------------------------------------ */
+.flip-card {
+  background: transparent;
+  margin: 20px 0;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+/* Stack both faces */
+.flip-card-face {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  transition: opacity 0.35s ease;
+}
+
+/* FRONT visible by default */
+.flip-card-front {
+  opacity: 1;
+  z-index: 2;
+}
+
+/* BACK hidden by default */
+.flip-card-back {
+  opacity: 0;
+  z-index: 1;
+}
+
+/* When flipped: front fades out, back fades in */
+.flip-card.flipped .flip-card-front {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.flip-card.flipped .flip-card-back {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* FRONT image */
+.flip-card-front.has-image {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.flip-card-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 12px;
+  background: linear-gradient(
+    to top,
+    rgba(255, 255, 255, 0.85),
+    rgba(255, 255, 255, 0.4),
+    rgba(255, 255, 255, 0)
+  );
+  color: #000;
+}
+
+.flip-card-title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 4px;
+}
+
+.flip-card-overlay p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #111;
+}
+
+/* BACK face content */
+.flip-card-back {
+  background: #161d39;
+  padding: 18px;
+  text-align: left;
+  color: var(--text-main);
+}
+
+.flip-card-back .flip-card-title {
+  color: var(--text-main) !important;
+}
+
+/* Pulse arrows */
+.process-arrow {
+  text-align: center;
+  font-size: 2rem;
+  color: var(--accent);
+  margin: 10px 0 20px;
+  opacity: 0.8;
+  animation: arrowPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes arrowPulse {
+  0% { transform: translateY(0); opacity: 0.8; }
+  50% { transform: translateY(4px); opacity: 1; }
+  100% { transform: translateY(0); opacity: 0.8; }
+}
+
+/* ------------------------------------------
+   Sequencing (Slide 5) – vertical
+------------------------------------------ */
+.sequencing-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.sequence-vertical {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sequence-step-box {
+  background: #161d39;
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 14px 16px;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.35);
+}
+
+.sequence-step-box label {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.sequence-step-box select {
+  width: 100%;
+  padding: 8px 12px;
+  background: #0c1224;
+  color: var(--text-main);
+  border-radius: 999px;
+  border: 1px solid var(--border-subtle);
+  font-size: 0.9rem;
+}
+
+.sequence-note {
+  margin-top: 12px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* ------------------------------------------
+   Matching (Slide 7)
+------------------------------------------ */
+.matching-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.match-definition {
+  background: #161d39;
+  padding: 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+}
+
+.match-definition select {
+  margin-top: 10px;
+  width: 100%;
+  padding: 6px;
+  border-radius: var(--radius-md);
+}
+
+/* ------------------------------------------
+   Mobile (UPDATED FLIP CARD FIX)
+------------------------------------------ */
+@media (max-width: 600px) {
+  .slide {
+    padding: 18px 14px 16px;
+  }
+
+  .slide-header h1 {
+    font-size: 1.3rem;
+  }
+
+  .slide-logo img {
+    height: 30px;
+  }
+
+  /* Keep a slightly taller card ratio on mobile, but still fixed,
+     so the front/back can overlap and flip correctly */
+  .flip-card-inner {
+    aspect-ratio: 4 / 3;
+  }
+
+  /* Slightly tighter padding + smaller text on the back to help fit */
+  .flip-card-back {
+    padding: 14px;
+  }
+
+  .flip-card-back p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+
+  .fullscreen-button {
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
+}
+
+/* ------------------------------------------
+   Intro video quiz overlay (Slide 1)
+------------------------------------------ */
+.intro-video-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+}
+
+/* The dark overlay that appears over the video at 12.5s */
+.video-quiz-overlay {
+  position: absolute;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 10;
+}
+
+/* The box containing the question */
+.video-quiz-box {
+  background: #0c1224;
+  border-radius: 18px;
+  padding: 18px 20px;
+  max-width: 420px;
+  width: 90%;
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+  text-align: left;
+}
+
+.video-quiz-question {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  margin: 0 0 10px;
+}
+
+/* Options list */
+.video-quiz-options {
+  list-style: none;
+  margin: 0 0 10px;
+  padding: 0;
+}
+
+/* Each clickable answer */
+.video-option {
+  background: #161d39;
+  border-radius: 999px;
+  padding: 8px 12px;
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border: 1px solid var(--border-subtle);
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+}
+
+.video-option:hover {
+  transform: translateY(-1px);
+}
+
+/* Correct answer feedback */
+.video-option.correct {
+  background: rgba(56, 232, 165, 0.12);
+  border-color: var(--accent);
+}
+
+/* Incorrect answer feedback */
+.video-option.incorrect {
+  background: rgba(255, 75, 106, 0.12);
+  border-color: var(--danger);
+}
+
+.video-quiz-feedback {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}

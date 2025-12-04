@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Potenix – Introduction Module</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    
+    <!-- SLIDE 1 – FULLSCREEN INTRO SPLASH -->
+        <!-- SLIDE 1 – FULLSCREEN INTRO SPLASH -->
+    <div id="slide1" class="slide splash fullscreen-splash active">
+      <div class="fullscreen-inner">
+
+        <div class="intro-video-wrapper">
+          <video
+            id="intro-video"
+            class="intro-video fullscreen-video"
+            playsinline
+            onended="nextSlide()"
+          >
+            <source src="media/potenix-intro.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+
+          <!-- Mid-video quiz overlay at 12.5 seconds -->
+          <div id="intro-video-quiz" class="video-quiz-overlay" hidden>
+            <div class="video-quiz-box">
+              <p class="video-quiz-question">
+                What do you see here?
+              </p>
+              <ul class="video-quiz-options">
+                <li class="video-option" data-correct="false">
+                  A) Useless food waste for landfill
+                </li>
+                <li class="video-option" data-correct="true">
+                  B) Huge potential for energy production
+                </li>
+              </ul>
+              <div class="video-quiz-feedback" data-feedback></div>
+            </div>
+          </div>
+        </div>
+
+        <button
+          id="intro-continue"
+          class="btn btn-primary fullscreen-button"
+          onclick="playIntroThenAdvance()"
+        >
+          Continue
+        </button>
+
+      </div>
+    </div>
+
+
+    <!-- SLIDE 2 -->
+    <div id="slide2" class="slide">
+      <div class="slide-logo">
+        <img src="media/potenix-logo.avif" alt="Potenix Logo">
+      </div>
+
+      <div class="slide-header">
+        <span class="slide-tag">Slide 1 of 7</span>
+        <h1>Welcome to Potenix</h1>
+      </div>
+
+      <div class="slide-image">
+        <img src="media/slide2-microscope.avif" alt="Microscope representing Potenix biotech focus">
+      </div>
+
+      <p>Potenix is a new kind of biotech company.</p>
+      <p>We combine synthetic biology, compact hardware and data-driven optimisation to turn unavoidable food scraps into on-site power.</p>
+      <p>Instead of paying for food waste to be hauled away, our system keeps the energy where it’s needed, cuts carbon along the chain, and gives organisations clear, auditable performance data.</p>
+      <p>This module will walk you through what we do, how it works, and why it matters.</p>
+
+      <div class="slide-footer">
+        <button class="btn" onclick="prevSlide()">Back</button>
+        <button class="btn btn-primary" onclick="nextSlide()">Next</button>
+      </div>
+    </div>
+
+    <!-- SLIDE 3 -->
+    <div id="slide3" class="slide">
+      <div class="slide-logo">
+        <img src="media/potenix-logo.avif" alt="Potenix Logo">
+      </div>
+
+      <div class="slide-header">
+        <span class="slide-tag">Slide 2 of 7</span>
+        <h1>Why Food Waste Is a Missed Energy Opportunity</h1>
+      </div>
+
+      <p>Every year, businesses throw away enough food to represent huge amounts of unused energy.</p>
+      <p>Buffet leftovers, uneaten hospital meals, processing off-cuts, catering waste on production sets — most of it goes into bins, then lorries, then landfill or centralised treatment.</p>
+      <p>That means:</p>
+
+      <ul>
+        <li>High waste costs</li>
+        <li>Emissions at every stage</li>
+        <li>Valuable energy lost</li>
+      </ul>
+
+      <p>Test your understanding with a quick check.</p>
+
+      <div id="micro-quiz-container"></div>
+      <div id="micro-quiz-feedback" class="feedback"></div>
+
+      <div class="slide-footer">
+        <button class="btn" onclick="prevSlide()">Back</button>
+        <button class="btn btn-primary" onclick="checkMicroQuiz()">Check answers</button>
+        <button class="btn" onclick="nextSlide()">Next</button>
+      </div>
+    </div>
+
+    <!-- SLIDE 4 -->
+    <div id="slide4" class="slide">
+      <div class="slide-logo">
+        <img src="media/potenix-logo.avif" alt="Potenix Logo">
+      </div>
+
+      <div class="slide-header">
+        <span class="slide-tag">Slide 3 of 7</span>
+        <h1>From Scraps to On-Site Energy</h1>
+      </div>
+
+      <p>The Potenix system is designed to fit neatly into existing operations: low-touch, sealed, and simple to run.</p>
+      <p>Tap each card to see how the process works.</p>
+
+      <div class="flip-card-container" id="flip-card-container"></div>
+
+      <div class="slide-footer">
+        <button class="btn" onclick="prevSlide()">Back</button>
+        <button class="btn btn-primary" onclick="nextSlide()">Next</button>
+      </div>
+    </div>
+
+    <!-- SLIDE 5 -->
+    <div id="slide5" class="slide">
+      <div class="slide-logo">
+        <img src="media/potenix-logo.avif" alt="Potenix Logo">
+      </div>
+
+      <div class="slide-header">
+        <span class="slide-tag">Slide 4 of 7</span>
+        <h1>Every Unit Is Also a Sensor</h1>
+      </div>
+
+      <p>Our biogenerator isn’t just a piece of hardware. Each unit logs what goes in, how it runs, and what comes out. That data drives a continuous optimisation loop.</p>
+      <p>Arrange the stages below in the order that the loop runs.</p>
+
+      <div id="circle-sequencing" class="sequencing-container"></div>
+      <div id="sequence-feedback" class="feedback"></div>
+
+      <div class="slide-footer">
+        <button class="btn" onclick="prevSlide()">Back</button>
+        <button class="btn btn-primary" onclick="checkSequence()">Check order</button>
+        <button class="btn" onclick="nextSlide()">Next</button>
+      </div>
+    </div>
+
+    <!-- SLIDE 6 -->
+    <div id="slide6" class="slide">
+      <div class="slide-logo">
+        <img src="media/potenix-logo.avif" alt="Potenix Logo">
+      </div>
+
+      <div class="slide-header">
+        <span class="slide-tag">Slide 5 of 7</span>
+        <h1>Built Around Real-World Kitchens</h1>
+      </div>
+
+      <p>We start where the problem — and the opportunity — are clearest: large sites with steady food waste and steady heat or power demand.</p>
+
+      <p>Today we are focused on:</p>
+      <ul>
+        <li>Hospitality</li>
+        <li>Healthcare</li>
+        <li>Food processors</li>
+        <li>Production sets</li>
+      </ul>
+
+      <p>Early progress includes:</p>
+      <ul>
+        <li>Pilots running across media production and hospitality</li>
+        <li>Investment and support from Zinc VC</li>
+        <li>A live Design Group of early adopters across sectors</li>
+        <li>Letters of intent in place and a waitlist for additional pilots</li>
+      </ul>
+
+      <div class="slide-footer">
+        <button class="btn" onclick="prevSlide()">Back</button>
+        <button class="btn btn-primary" onclick="nextSlide()">Next</button>
+      </div>
+    </div>
+
+    <!-- SLIDE 7 -->
+    <div id="slide7" class="slide">
+      <div class="slide-logo">
+        <img src="media/potenix-logo.avif" alt="Potenix Logo">
+      </div>
+
+      <div class="slide-header">
+        <span class="slide-tag">Slide 6 of 7</span>
+        <h1>What Sets Potenix Apart</h1>
+      </div>
+
+      <p>We’re not just moving waste around differently. We’re changing where and how its value is captured.</p>
+      <p>Match each term to its description to explore the core ideas behind our approach.</p>
+
+      <div id="matching-task" class="matching-grid"></div>
+      <div id="matching-feedback" class="feedback"></div>
+
+      <div class="slide-footer">
+        <button class="btn" onclick="prevSlide()">Back</button>
+        <button class="btn btn-primary" onclick="checkMatches()">Check matches</button>
+        <button class="btn" onclick="nextSlide()">Next</button>
+      </div>
+    </div>
+
+    <!-- SLIDE 8 -->
+    <div id="slide8" class="slide">
+      <div class="slide-logo">
+        <img src="media/potenix-logo.avif" alt="Potenix Logo">
+      </div>
+
+      <div class="slide-header">
+        <span class="slide-tag">Slide 7 of 7</span>
+        <h1>Quick Check: Potenix in a Nutshell</h1>
+      </div>
+
+      <p>Before you finish, take a short quiz to check your understanding of what Potenix does and how the system creates value.</p>
+
+      <p>You’ll review:</p>
+      <ul>
+        <li>The problem we’re solving</li>
+        <li>How the three-stage process works</li>
+        <li>The idea of the continuous learning loop</li>
+        <li>Who we’re working with</li>
+        <li>What makes our approach different</li>
+      </ul>
+
+      <div id="final-quiz-container"></div>
+      <div id="final-quiz-feedback" class="feedback"></div>
+
+      <div class="slide-footer">
+        <button class="btn" onclick="prevSlide()">Back</button>
+        <button class="btn btn-primary" onclick="submitFinalQuiz()">Submit quiz</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
