@@ -22,15 +22,17 @@
       <div class="fullscreen-inner">
 
         <div class="intro-video-wrapper">
-          <video
-            id="intro-video"
-            class="intro-video fullscreen-video"
-            playsinline
-            onended="nextSlide()"
-          >
-            <source src="media/potenix-intro.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
+         <video
+  id="intro-video"
+  class="intro-video fullscreen-video"
+  playsinline
+  poster="media/potenix-intro-poster.jpg"
+  onended="nextSlide()"
+>
+  <source src="media/potenix-intro.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
 
           <!-- Mid-video quiz overlay at 12.5 seconds -->
           <div id="intro-video-quiz" class="video-quiz-overlay" hidden>
@@ -263,3 +265,4 @@
   <script src="script.js"></script>
 </body>
 </html>
+
